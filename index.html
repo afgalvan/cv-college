@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés Galván - DevOps Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #047857;
+            --accent-color: #10b981;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f0fdf4;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #34d399 0%, #065f46 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 15px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav a:hover::before {
+            left: 0;
+        }
+
+        .nav a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 i {
+            font-size: 1.5rem;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background: var(--bg-secondary);
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .experience-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .experience-item .company {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .experience-item .period {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .experience-item li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow);
+        }
+
+        /* Full width sections */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Languages */
+        .languages {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .language-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .language-item .flag {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .languages {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Download button */
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-img">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1>Andrés Galván</h1>
+            <p class="subtitle">DevOps Engineer</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>andresgalfajar@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Bogotá, Colombia</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>3+ años de experiencia</span>
+                </div>
+            </div>
+            <a href="Andres_Galvan_Resume.pdf" download="Andres_Galvan_Resume.pdf" class="download-btn">
+                <i class="fas fa-download"></i>
+                Descargar CV
+            </a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Resumen Profesional -->
+            <section id="resumen" class="section full-width animate-on-scroll">
+                <h2><i class="fas fa-user-tie"></i>Resumen Profesional</h2>
+                <p>DevOps Engineer con 3 años de experiencia especializado en plataformas de Big Data. Actualmente
+                    contribuyo a un proyecto global que utiliza infraestructura de Big Data en Azure, involucrando
+                    numerosas aerolíneas y aeropuertos a nivel mundial. Mi experiencia técnica abarca diferentes
+                    lenguajes de programación con un sólido dominio en tecnologías de contenedores, computación en la
+                    nube, gestión de incidentes y CI/CD. Soy un defensor de las mejores prácticas con capacidad de
+                    adaptación comprobada y un historial de dominio rápido de nuevas tecnologías para impulsar la
+                    innovación en DevOps.</p>
+            </section>
+
+            <!-- Experiencia Laboral -->
+            <section id="experiencia" class="section full-width animate-on-scroll">
+                <h2><i class="fas fa-briefcase"></i>Experiencia Laboral</h2>
+
+                <div class="experience-item">
+                    <h3>Cloud DevOps</h3>
+                    <div class="company">Amadeus IT Group, Bogotá, Colombia</div>
+                    <div class="period">Junio 2025 - Actual</div>
+                    <ul>
+                        <li>Agregué capacidades de registro y monitoreo de cómputo en Databricks con Splunk</li>
+                        <li>Automaticé la activación de SQL Serverless en el workspace de Databricks, ahorrando hasta
+                            medio millón de euros/año</li>
+                        <li>Añadí capacidades de compartición para clientes usando Delta Share con habilitación de
+                            autoservicio con SNOW</li>
+                    </ul>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Bicep (IaC)</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Databricks</span>
+                        <span class="skill-tag">Splunk</span>
+                        <span class="skill-tag">Delta Share</span>
+                        <span class="skill-tag">SNOW</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>DevOps Engineer, Jr</h3>
+                    <div class="company">Positivo S+, Bogotá, Colombia</div>
+                    <div class="period">Abril 2024 - Mayo 2025</div>
+                    <p><em>Contratista en Amadeus</em></p>
+                    <ul>
+                        <li>Desarrollé un sistema de alertas para integridad de archivos en flujos de trabajo de Big
+                            Data, reduciendo discrepancias de datos</li>
+                        <li>Automaticé herramientas de reprocesamiento de archivos para resolver problemas de datos
+                            faltantes, reduciendo la intervención manual</li>
+                        <li>Agregué monitoreo en Databricks usando Overwatch con Azure Pipelines</li>
+                        <li>Mejoré la seguridad de Databricks habilitando endpoints privados en todos los workspaces
+                            (automatizado)</li>
+                    </ul>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Bicep (IaC)</span>
+                        <span class="skill-tag">Azure Functions</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Databricks</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>DevOps Engineer, Junior Advance</h3>
+                    <div class="company">Globant, Valledupar, Colombia</div>
+                    <div class="period">Noviembre 2023 - Abril 2024</div>
+                    <p><em>Contratista en Autodesk</em></p>
+                    <ul>
+                        <li>Migré infraestructura Terraform legacy, implementando un nuevo proceso de CI/CD que redujo
+                            el tiempo de despliegue en un 25%</li>
+                        <li>Migré +1000 lambdas en producción de python2 a python3 usando AWS step functions</li>
+                        <li>Diseñé e implementé una capa Lambda para la transición de OAuth1 a OAuth2, mejorando la
+                            seguridad e interoperabilidad</li>
+                    </ul>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Spinnaker</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Splunk</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <h3>DevOps, Junior</h3>
+                    <div class="company">Aprehsi, Valledupar, Colombia</div>
+                    <div class="period">Abril 2022 - Noviembre 2023</div>
+                    <ul>
+                        <li>Lideré la migración de la empresa a contenedores y Kubernetes</li>
+                        <li>Arquitecturé e implementé el workflow y deployment pipelines para clusters de Kubernetes,
+                            implementé CI/CD usando Jenkins y ArgoCD</li>
+                        <li>Desarrollé herramientas para todos los equipos de la empresa para mejorar la developer
+                            experience</li>
+                    </ul>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">DigitalOcean</span>
+                        <span class="skill-tag">Servidores On Premise</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Habilidades Técnicas -->
+            <section id="habilidades" class="section animate-on-scroll">
+                <h2><i class="fas fa-cogs"></i>Habilidades Técnicas</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fab fa-docker"></i>Contenedores</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Podman</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-cloud"></i>Cloud</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Digital Ocean</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-code"></i>Programación</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Bash</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-tools"></i>CI/CD</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Azure Pipelines</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">GitHub Actions</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fab fa-linux"></i>Sistemas</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Ansible</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-chart-line"></i>Monitoreo</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Splunk</span>
+                            <span class="skill-tag">Prometheus</span>
+                            <span class="skill-tag">Grafana</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Educación -->
+            <section id="educacion" class="section animate-on-scroll">
+                <h2><i class="fas fa-graduation-cap"></i>Educación</h2>
+                <div class="experience-item">
+                    <h3>Ingeniería de Sistemas</h3>
+                    <div class="company">Universidad San Jose</div>
+                    <div class="period">Agosto 2025</div>
+                    <p>Bogotá, Colombia</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Ingeniería de Sistemas</h3>
+                    <div class="company">Universidad Popular del Cesar</div>
+                    <div class="period">Enero 2020 - Abril 2024 (No terminado)</div>
+                    <p>Valledupar, Colombia</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Técnico en Sistemas</h3>
+                    <div class="company">SENA</div>
+                    <div class="period">Enero 2018 - Abril 2019</div>
+                    <p>Valledupar, Colombia</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Idiomas -->
+        <section id="idiomas" class="section full-width animate-on-scroll">
+            <h2><i class="fas fa-globe"></i>Idiomas</h2>
+            <div class="languages">
+                <div class="language-item">
+                    <span class="flag">🇪🇸</span>
+                    <h3>Español</h3>
+                    <p>Nativo (C2)</p>
+                </div>
+                <div class="language-item">
+                    <span class="flag">🇺🇸</span>
+                    <h3>Inglés</h3>
+                    <p>Avanzado (B2)</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling function
+        function smoothScroll(targetId) {
+            document.getElementById(targetId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Animate on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Add stagger animation delay
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // Initial check for animations
+            animateOnScroll();
+        });
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+
+        // Add hover effects to experience items
+        document.querySelectorAll('.experience-item').forEach(item => {
+            item.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateX(5px) scale(1.02)';
+            });
+
+            item.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateX(5px)';
+            });
+        });
+
+        // Add click effects to skill tags
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                this.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 500);
+            });
+        });
+
+        // Add pulse animation for skill tags
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
